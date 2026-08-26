@@ -1,0 +1,85 @@
+AGENDA PERSONAL — cómo instalarla en la tablet o el móvil
+===========================================================
+
+Qué contiene esta carpeta
+--------------------------
+- index.html        -> la agenda (tu archivo, con pequeños ajustes)
+- manifest.json      -> la "ficha" que le dice al sistema que esto es
+                        una app instalable (nombre, icono, que se abra
+                        tanto en vertical como en horizontal, etc.)
+- service-worker.js  -> hace que la app funcione instalada y SIN
+                        conexión ni servidor, una vez instalada
+- icons/             -> el icono que enviaste, ya sin fondo blanco,
+                        en todos los tamaños que piden Android/iOS
+
+
+1) LOS DATOS: no se borran al abrir o cerrar
+---------------------------------------------
+Esto ya lo trae tu archivo hecho y no he tenido que tocarlo: en cuanto
+abres la app por primera vez, ella sola crea una carpeta propia y
+privada dentro del dispositivo (usa la tecnología "Origin Private File
+System" del propio navegador) y ahí escribe cada cita, nota o dato que
+introduces, en archivos .json reales. Esa carpeta:
+  - se crea sola, sin pedir permiso ni preguntar nada
+  - no se borra al cerrar la app ni al volver a abrirla
+  - solo desaparecería si desinstalas la app o borras sus datos a
+    mano desde Ajustes del dispositivo (igual que con cualquier app)
+Si además quieres ver esa carpeta con el explorador de archivos de la
+tablet, dentro de la propia agenda hay un botón en "Acciones" ->
+"Carpeta de guardado" para conectar una carpeta visible (opcional).
+
+
+2) EL ICONO
+------------
+El icono que enviaste ya está preparado sin fondo blanco (fondo
+transparente) y en todos los tamaños necesarios. Es el que verá la
+persona en la pantalla de inicio al instalar la app.
+
+
+3) VERTICAL Y HORIZONTAL
+--------------------------
+El manifest.json lleva "orientation": "any", así que la app se puede
+usar girando la tablet o el móvil en cualquier sentido, sin bloquearse
+en uno solo. También he añadido unos ajustes de estilo para que el
+encabezado y los menús se reajusten bien en pantallas pequeñas.
+
+
+4) CONVERTIRLO EN UNA APP INSTALABLE (APK) — paso a paso
+-----------------------------------------------------------
+Una app instalable de verdad (con icono propio, pantalla completa,
+funcionando sin servidor) necesita generarse UNA VEZ con una
+herramienta gratuita. Después de instalada en la tablet, ya no hace
+falta ningún servidor ni conexión para usarla.
+
+Necesitas dos cosas gratuitas y sin programar nada:
+
+  PASO A — Subir esta carpeta a un sitio con dirección https (una
+  sola vez, para poder "empaquetarla"):
+    - La forma más sencilla: crear una cuenta gratuita en GitHub
+      (github.com), crear un repositorio nuevo, subir estos archivos
+      (arrastrando la carpeta) y activar "GitHub Pages" en los ajustes
+      del repositorio (Settings -> Pages -> Deploy from branch). Te
+      dará una dirección tipo:
+      https://tu-usuario.github.io/agenda-personal/
+
+  PASO B — Generar el instalable (.apk) con PWABuilder (de Microsoft,
+  gratis, sin programar):
+    1. Entra en https://www.pwabuilder.com
+    2. Pega la dirección https del PASO A y pulsa "Start"
+    3. Cuando la analice, pulsa "Package for stores" -> elige "Android"
+    4. Descarga el archivo .apk que genera
+    5. Pasa ese .apk a la tablet o el móvil (por cable, Drive, etc.)
+       y ábrelo para instalarlo (la primera vez pedirá activar
+       "Permitir instalar apps de origen desconocido" en Ajustes)
+
+  A partir de ahí, la app queda instalada con su icono propio, se
+  abre a pantalla completa como cualquier otra app, funciona en
+  vertical y horizontal, y todos los datos se guardan solos sin
+  necesidad de internet ni de ningún servidor.
+
+Alternativa más simple (sin generar un .apk): desde el propio
+navegador Chrome de la tablet, abrir la dirección https del PASO A y
+tocar el aviso "Añadir a pantalla de inicio" / "Instalar app" que
+aparece solo. Se instala igual, con el mismo icono, funcionando
+también sin conexión — es la opción más rápida si no necesitas
+repartir un archivo .apk suelto.
